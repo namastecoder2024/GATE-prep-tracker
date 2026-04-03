@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GATE 2026 — Subject Wise Plan & Timetable</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#061223 0%, #0b1530 100%);color:#e6eef8;margin:0;padding:24px}
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    .logo{width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+
+    /* Left content */
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    .subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+    .subject{background:linear-gradient(180deg,rgba(255,255,255,0.02),var(--glass));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .subject h3{margin:0;font-size:16px}
+    .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted)}
+    .subject .details{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.4}
+    .subject .actions{display:flex;gap:8px;margin-top:12px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:#dff6fb;cursor:pointer;font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#7c3aed);border:0}
+    .small{font-size:13px;padding:6px 8px}
+
+    /* Timetable */
+    .timetable table{width:100%;border-collapse:collapse;margin-top:8px}
+    .timetable th,.timetable td{padding:10px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:left;font-size:14px}
+    .day{font-weight:700}
+
+    /* Controls */
+    .controls{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    input[type="search"]{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+
+    /* Progress */
+    .progressWrap{display:flex;gap:12px;align-items:center}
+    .progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;flex:1}
+    .progress > i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#7c3aed);width:0%}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">GY</div>
+      <div>
+        <h1>GATE 2026 — Subject-wise Plan & Time Table</h1>
+        <p class="lead">2-month focused plan tailored to your job schedule. Mark progress, print schedule, and track weak topics.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <div class="card">
+          <div class="controls">
+            <input id="search" type="search" placeholder="Filter subjects (e.g., DSA, DBMS, Aptitude)...">
+            <button class="btn" id="reset">Reset</button>
+            <button class="btn primary" id="print">Print / Save as PDF</button>
+          </div>
+
+          <h2 style="margin-top:4px">Subject Plans</h2>
+          <p style="color:var(--muted);margin:6px 0 14px;font-size:13px">Click "Details" for a daily breakdown. Toggle completed to track progress.</p>
+
+          <div class="subjects" id="subjects"></div>
+
+          <div style="margin-top:18px;display:flex;gap:12px;align-items:center;justify-content:space-between">
+            <div>
+              <strong>Overall Progress</strong>
+              <div class="progressWrap" style="margin-top:8px">
+                <div class="progress"><i id="progBar"></i></div>
+                <div id="progText" style="min-width:54px;text-align:right">0%</div>
+              </div>
+            </div>
+            <div>
+              <small style="color:var(--muted)">Two-month plan • Weekly mock tests in Week 8</small>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h2>Notes & Tips</h2>
+          <ul style="color:var(--muted);line-height:1.6">
+            <li>Daily: 2 hrs concept + 1 hr practice + 1 hr revision/test.</li>
+            <li>Make formula flashcards and revise 15 minutes daily.</li>
+            <li>Week 8: focus on mocks and error correction — test, analyze, fix.</li>
+            <li>Use the "Mark completed" button to track done topics.</li>
+          </ul>
+        </div>
+
+      </main>
+
+      <aside>
+        <div class="card timetable">
+          <h3>Personalised Timetable</h3>
+          <p class="lead" style="margin-top:6px">Your job schedule: <strong>Sun‑Mon 11:00–21:00</strong>, <strong>Tue 08:00–18:00</strong>, <strong>Wed‑Thu 06:00–16:00</strong></p>
+
+          <table>
+            <thead>
+              <tr><th>Day</th><th>Study Slots</th></tr>
+            </thead>
+            <tbody id="timetableBody"></tbody>
+          </table>
+
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn small" id="editSchedule">Edit Schedule</button>
+            <button class="btn small" id="exportCSV">Export CSV</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h4>Quick Actions</h4>
+          <p style="color:var(--muted);font-size:13px;margin:6px 0">Use these to prepare for the week.</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn" id="weeklyMock">Schedule Weekly Mock</button>
+            <button class="btn" id="downloadPlan">Download Plan (TXT)</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer>
+      Built for <strong>Vivek Yadav</strong> • Editable — save this file as <code>Subject.html</code> and open in a browser.
+    </footer>
+  </div>
+
+  <script>
+    // Subject data (2-month plan)
+    const subjects = [
+      {id:'dsa', title:'Data Structures & Algorithms', marks:'10–12', weeks:'1–2', topics:['Sorting','Searching','Trees','Graphs','Heaps','Hashing'], daily:'2 hrs concept + 1 hr coding practice'},
+      {id:'apt', title:'Aptitude & Reasoning', marks:'10–12', weeks:'1–8 (daily)', topics:['Number systems','Algebra','Probability','Calculation shortcuts'], daily:'1 hr practice'},
+      {id:'toc', title:'Theory of Computation', marks:'7–8', weeks:'3–4', topics:['DFA/NFA','CFG','Pumping Lemma','Regular Expressions'], daily:'1.5 hrs'},
+      {id:'os', title:'Operating Systems', marks:'5–6', weeks:'3–4', topics:['CPU Scheduling','Deadlocks','Memory Management','Virtual Memory'], daily:'1.5 hrs'},
+      {id:'dbms', title:'DBMS', marks:'4–6', weeks:'5–6', topics:['ER Model','Normalization','SQL','Transactions'], daily:'1.5 hrs'},
+      {id:'cn', title:'Computer Networks', marks:'4–6', weeks:'5–6', topics:['OSI/TCP-IP','Congestion Control','Routing','TCP/UDP'], daily:'1.5 hrs'},
+      {id:'dm', title:'Discrete Mathematics', marks:'4–6', weeks:'7', topics:['Set Theory','Relations','Graph Theory','Combinatorics'], daily:'1 hr'},
+    ];
+
+    const subjectsContainer = document.getElementById('subjects');
+    const progBar = document.getElementById('progBar');
+    const progText = document.getElementById('progText');
+
+    function renderSubjects(filter = ''){
+      subjectsContainer.innerHTML = '';
+      const doneCount = subjects.filter(s => localStorage.getItem('done_'+s.id) === '1').length;
+      subjects.forEach(s => {
+        if(filter && !s.title.toLowerCase().includes(filter.toLowerCase()) && !s.id.includes(filter.toLowerCase())) return;
+        const div = document.createElement('div'); div.className='subject';
+        div.innerHTML = `
+          <h3>${s.title}</h3>
+          <div class="tags">
+            <span class="tag">Target: ${s.marks} marks</span>
+            <span class="tag">Weeks: ${s.weeks}</span>
+            <span class="tag">Daily: ${s.daily}</span>
+          </div>
+          <div class="details" id="det_${s.id}">${s.topics.slice(0,4).join(', ')}${s.topics.length>4?', ...':''}</div>
+          <div class="actions">
+            <button class="btn" onclick="toggleDetails('${s.id}')">Details</button>
+            <button class="btn" id="btn_${s.id}" onclick="toggleDone('${s.id}')">${localStorage.getItem('done_'+s.id) === '1' ? 'Mark undone' : 'Mark completed'}</button>
+          </div>
+        `;
+        subjectsContainer.appendChild(div);
+      });
+      // update progress
+      const percent = Math.round((doneCount/subjects.length)*100);
+      progBar.style.width = percent + '%';
+      progText.textContent = percent + '%';
+    }
+
+    function toggleDetails(id){
+      const el = document.getElementById('det_'+id);
+      if(!el) return;
+      const subj = subjects.find(s=>s.id===id);
+      if(el.dataset.expanded === '1'){
+        el.innerHTML = subj.topics.slice(0,4).join(', ') + (subj.topics.length>4?', ...':'');
+        el.dataset.expanded = '0';
+      } else {
+        el.innerHTML = '<strong>Topics:</strong> ' + subj.topics.join(', ') + '<br><strong>Daily plan:</strong> ' + subj.daily + '<br><strong>Strategy:</strong> Study + practice + weekly PYQs.';
+        el.dataset.expanded = '1';
+      }
+    }
+
+    function toggleDone(id){
+      const key = 'done_'+id;
+      if(localStorage.getItem(key) === '1') localStorage.removeItem(key); else localStorage.setItem(key,'1');
+      renderSubjects(document.getElementById('search').value);
+    }
+
+    // Timetable generation based on provided schedule
+    const timetableBody = document.getElementById('timetableBody');
+    const schedule = [
+      {day:'Sunday',slots:['06:00 — 08:00 AM: New Topic','09:30 — 10:30 PM: Practice/Revision']},
+      {day:'Monday',slots:['06:00 — 08:00 AM: New Topic','09:30 — 10:30 PM: Practice/Revision']},
+      {day:'Tuesday',slots:['06:00 — 07:00 AM: Quick Revision','07:00 — 09:30 PM: New Topic + Practice']},
+      {day:'Wednesday',slots:['04:30 — 06:30 PM: New Topic','06:30 — 07:00 PM: Revision']},
+      {day:'Thursday',slots:['04:30 — 06:30 PM: New Topic','06:30 — 07:00 PM: Revision']},
+      {day:'Friday',slots:['08:00 — 10:00 AM: Topic Coverage','11:00 AM — 01:00 PM: PYQ Practice','04:00 — 06:00 PM: Mock/Test']},
+      {day:'Saturday',slots:['08:00 — 10:00 AM: Topic Coverage','11:00 AM — 01:00 PM: PYQ Practice','04:00 — 06:00 PM: Mock/Test']},
+    ];
+
+    function renderTimetable(){
+      timetableBody.innerHTML = '';
+      schedule.forEach(r =>{
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td'); td1.className='day'; td1.textContent = r.day;
+        const td2 = document.createElement('td'); td2.innerHTML = r.slots.map(s=>'<div>'+s+'</div>').join('');
+        tr.appendChild(td1); tr.appendChild(td2); timetableBody.appendChild(tr);
+      });
+    }
+
+    // Search handling
+    document.getElementById('search').addEventListener('input', e=>{
+      renderSubjects(e.target.value.trim());
+    });
+    document.getElementById('reset').addEventListener('click', ()=>{document.getElementById('search').value = ''; renderSubjects();});
+
+    // Print
+    document.getElementById('print').addEventListener('click', ()=>{window.print();});
+
+    // Export CSV for timetable
+    document.getElementById('exportCSV').addEventListener('click', ()=>{
+      let csv = 'Day,Slot\n';
+      schedule.forEach(r=>{ r.slots.forEach(s=>{ csv += '"'+r.day+'","'+s+'"\n'; }); });
+      const blob = new Blob([csv],{type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'GATE_Timetable.csv'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // Download plan as TXT
+    document.getElementById('downloadPlan').addEventListener('click', ()=>{
+      let txt = 'GATE 2026 - 2 Month Subject-wise Plan\n\n';
+      subjects.forEach(s=>{ txt += s.title + ' ('+s.weeks+')\nTopics: '+s.topics.join(', ')+'\nDaily: '+s.daily+'\nTarget Marks: '+s.marks+'\n\n'; });
+      const blob = new Blob([txt],{type:'text/plain'});
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'GATE_Subject_Plan.txt'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // Weekly Mock alert (simple scheduling)
+    document.getElementById('weeklyMock').addEventListener('click', ()=>{
+      alert('Weekly mock test suggestion:\n\nSchedule 1 full-length mock every Sunday evening in Week 2,4,6,8. Increase to weekly in last month.');
+    });
+
+    // Edit schedule (simple prompt-edit)
+    document.getElementById('editSchedule').addEventListener('click', ()=>{
+      const day = prompt('Enter the day to edit (e.g., Tuesday):'); if(!day) return;
+      const entry = schedule.find(s=>s.day.toLowerCase()===day.toLowerCase());
+      if(!entry){alert('Day not found. Use full day name like "Sunday"'); return}
+      const newSlots = prompt('Enter slots for '+entry.day+' separated by || (e.g., "06:00-07:00: Quick Revision || 20:00-21:30: Practice")');
+      if(!newSlots) return; entry.slots = newSlots.split('||').map(s=>s.trim()); renderTimetable();
+    });
+
+    // Init
+    renderSubjects(); renderTimetable();
+  </script>
+</body>
+</html>

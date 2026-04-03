@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" onload="pageLoaded()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATE Preparation - Home</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <h1>GATE Prep Zone 🚀</h1>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="subject.html">Subjects</a></li>
+            <li><a href="lecture.html">Lectures</a></li>
+            <li><a href="mock.html">Mock Test</a></li>
+        </ul>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </nav>
+
+    <!-- Floating Motivation -->
+    <div class="floating-text" id="floatingText">Keep Going! 💪</div>
+
+    <!-- Main Section -->
+    <section class="home">
+        <h2 id="motivationText">Welcome to GATE Preparation Journey</h2>
+
+        <p class="typewriter">"Success is not for the lazy. GATE is not just an exam, it's a test of consistency and determination.  
+        2 months, 60 days, 1440 hours! Stay focused every day to achieve 40+ marks and clear the cutoff."</p>
+
+        <button onclick="window.location.href='subject.html'">🚀 Start Preparation</button>
+
+        <h3>Countdown to GATE:</h3>
+        <p id="countdown" style="font-size: 22px; font-weight: bold;"></p>
+
+        <h3>📅 Daily Timetable:</h3>
+        <ul class="timetable">
+            <li>🌅 Morning (2 hrs): Mathematics & DSA</li>
+            <li>🌆 Evening (2 hrs): OS & CN</li>
+            <li>🌙 Night (1 hr): Revision & Mock Tests</li>
+        </ul>
+
+        <!-- Progress Bar -->
+        <progress max="100" value="40"></progress>
+        <p>🎯 Progress towards 40+ marks</p>
+
+        <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+        <button onclick="openLogin()">🔐 Login</button>
+    </section>
+
+    <!-- Popup Login -->
+    <div id="loginPopup" class="popup">
+        <h3>Login</h3>
+        <input type="text" placeholder="Email" class="input-box"><br><br>
+        <input type="password" placeholder="Password" class="input-box"><br><br>
+        <button onclick="closeLogin()">Close</button>
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="index.js"></script>
+
+</body>
+</html>
